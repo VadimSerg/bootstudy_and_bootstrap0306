@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>UsersController</title>
+    <style>table th,
+    table td{padding:10px;}
+    row {
+        font-style: italic;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Список пользователей</h1>
+
+    <a href="/showForm">Добавить пользователя</a>
+
+    <br/><br>
+
+    <a href="/showFormRoles"> Добавить роли </a>
+    <br/><br>
+
+
+
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+    <br/><br>
+
+    <table border="4">
+
+        <tr>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Возраст</th>
+          <th>Город</th>
+          <th>Роли</th>
+          <th>Действия</th>
+        </tr>
+
+        <tr th:each="user:${usersSet}">
+
+
+
+        <td th:utext="${user.userName}">First name</td>
+        <td th:utext="${user.surname}">Surname</td>
+        <td th:utext ="${user.age}">Age</td>
+        <td th:utext="${user.city}">City</td>
+
+            <td >
+                <ul>
+                    <th:block th:each="role : ${user.roles}">
+                        <li th:text="${role.roleName}">ROLE_USER</li>
+                    </th:block>
+                </ul>
+            </td>
+
+
+        <td>
+            <a th:href="@{/edit/{id}(id=${user.getId()})}">Редактировать</a>
+            <a th:href="@{/{id}(id=${user.getId()})}">Удалить</a>
+        </td>
+        </tr>
+
+
+
+
+
+    </table>
+
+
+<br/><br>
+
+    <label>Список ролей </label>
+    <table border="4">
+
+        <tr>
+            <th>id roles</th>
+            <th>Role Name</th>
+            <th>Действия</th>
+        </tr>
+
+        <tr th:each="role:${RolesSet}">
+
+
+
+            <td th:utext="${role.id}">id </td>
+            <td th:utext="${role.getRoleName()}">Roles</td>
+
+
+
+
+            <td>
+                <a th:href="@{editRole/{id}(id=${role.getId()})}">Редактировать</a>
+                <a th:href="@{role{id}(id=${role.getId()})}">Удалить</a>
+            </td>
+        </tr>
+
+
+
+
+
+    </table>
+
+
+
+
+
+</body>
+</html>
