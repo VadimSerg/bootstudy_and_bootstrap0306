@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 @Controller
+//@RestController   //почему страница не полностью  отображается
 @RequestMapping("/")
 
 public class AdminController {
@@ -41,10 +42,17 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String getUsers(Model model) {
+    public String getUsers(Model model,@AuthenticationPrincipal UserDetails logedInUser) {
+
+        User user = (User) userDetailsService.loadUserByUsername(logedInUser.getUsername());
+        model.addAttribute("user",user);
+
+
         model.addAttribute("usersSet",userService.getAll());
         model.addAttribute("RolesSet",roleService.getAllRoles());
-        return "admins_pages/list";
+      return "admins_pages/listBS";
+//
+//      return  "admins_pages/allUsers";
     }
 
 
