@@ -50,9 +50,9 @@ public class AdminController {
 
         model.addAttribute("usersSet",userService.getAll());
         model.addAttribute("RolesSet",roleService.getAllRoles());
-      return "admins_pages/listBS";
-//
-//      return  "admins_pages/allUsers";
+//      return "admins_pages/listBS";
+
+      return  "admins_pages/allUsers";
     }
 
 
@@ -61,19 +61,18 @@ public class AdminController {
         User user = new User();
         model.addAttribute("user",user);
         model.addAttribute("AllRoles",roleService.getAllRoles());
-        return "admins_pages/newUser";
+//        return "admins_pages/newUser";
+        return "admins_pages/allUsers";
+
     }
 
 
 
     @PostMapping(value = "/saveUser")
   //  @Validated
-    public  String saveUser(@Valid @ModelAttribute("user") User user,
-                             @Valid @RequestParam(value = "roles_checkbox")  @Size(min=1) String [] authorities,BindingResult bindingResult ) {
+    public  String saveUser(@ModelAttribute("user") User user,
+                             @RequestParam(value ="rolesToAdd") String [] authorities ) {
 
-        if (bindingResult.hasErrors()){
-            return  "admins_pages/newUser";
-        }
 
 
 //        if (authorities.length  ==0) {

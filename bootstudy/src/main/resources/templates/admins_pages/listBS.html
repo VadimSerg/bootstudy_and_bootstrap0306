@@ -25,7 +25,16 @@
 <body>
     <div class="container-sm">
         <h1>Admin panel</h1>
-        <h2> Welcome user <th th:text="${user.getUsername()}"></th> your id is <th th:text ="${user.getId()}"!!! ></th>  <th th:text="${user.getRoles()}"></h2>
+       <!-- <h2> Welcome user <th th:text="${user.getUsername()}"></th> your id is <th th:text ="${user.getId()}"!!! ></th>  <th th:text="${user.getRoles()}"></h2> -->
+
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User</a>
+            </li>
+        </ul>
 
         <nav class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="nav-home" aria-selected="true">All users</a>
