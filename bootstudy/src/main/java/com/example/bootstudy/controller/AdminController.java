@@ -55,15 +55,15 @@ public class AdminController {
     }
 
 
-    @GetMapping("/showForm")
-    public  String showFormForAddingUser(Model model) {
-        User user = new User();
-        model.addAttribute("user",user);
-        model.addAttribute("AllRoles",roleService.getAllRoles());
-//        return "admins_pages/newUser";
-        return "admins_pages/listBS";
-
-    }
+//    @GetMapping("/showForm")
+//    public  String showFormForAddingUser(Model model) {
+//     //   User user = new User();
+//      //  model.addAttribute("user",user);
+//       // model.addAttribute("AllRoles",roleService.getAllRoles());
+////        return "admins_pages/newUser";
+//        return "admins_pages/listBS";
+//
+//    }
 
 
 
