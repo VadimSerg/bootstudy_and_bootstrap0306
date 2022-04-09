@@ -13,7 +13,6 @@ import com.example.bootstudy.service.RoleService;
 import com.example.bootstudy.service.UserService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 @Controller
 //@RestController   //почему страница не полностью  отображается
@@ -50,9 +49,9 @@ public class AdminController {
 
         model.addAttribute("usersSet",userService.getAll());
         model.addAttribute("RolesSet",roleService.getAllRoles());
-//      return "admins_pages/listBS";
+      return "admins_pages/listBS";
 
-      return  "admins_pages/allUsers";
+
     }
 
 
@@ -62,7 +61,7 @@ public class AdminController {
         model.addAttribute("user",user);
         model.addAttribute("AllRoles",roleService.getAllRoles());
 //        return "admins_pages/newUser";
-        return "admins_pages/allUsers";
+        return "admins_pages/listBS";
 
     }
 
@@ -71,7 +70,7 @@ public class AdminController {
     @PostMapping(value = "/saveUser")
   //  @Validated
     public  String saveUser(@ModelAttribute("user") User user,
-                             @RequestParam(value ="rolesToAdd") String [] authorities ) {
+                             @RequestParam(value ="roles_checkbox") String [] authorities ) {
 
 
 
@@ -80,14 +79,16 @@ public class AdminController {
 //            return "admins_pages/newUser";
 //
 //       }
+
+
         System.out.println("authorities :length: "+ authorities.length );
 
         user.setRoles(roleService.getRolesByRoleNames(authorities));
-       // user.setRoles(user.getRoles());
+//        user.setRoles(user.getRoles());
         userService.saveUser(user);
         System.out.println("USER SAVED WAS Succesfully");
         return "redirect:/admin";
-
+//
     }
 
 
