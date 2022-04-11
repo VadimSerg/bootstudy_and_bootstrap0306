@@ -82,7 +82,7 @@
             <td><a href="#" th:href="@{/{id}(id=${user.getId()})}">
             <button type="button" class="btn btn-danger">Удалить</button> </a></td>
 
-<
+
         </tr>
 
         </tbody>
@@ -94,30 +94,29 @@
 
     
 					<div class="col-14">
-						<label for="username" class="form-label">First name: </p>
-						<input type="text" class="form-control"  id="username" th:field="*{username}">
+						<p class="form-label" for="username">First name: </p>
+						<input type="text" class="form-control"  id="username" th:field="*{username}" placeholder="username">
        
      
 
      
 						<p class="form-label" for="surname" > Last name :  </p>
-						<input type="text" class="form-control"  id="surname"th:field="*{surname}">
+						<input type="text" class="form-control"  id="surname"th:field="*{surname}" placeholder="username">
         
      
 
 						<p class="form-label" for="city"> City: </p>
-						<input type="text" class="form-control"  id="city"  th:field="*{city}">
+						<input type="text" class="form-control"  id="city"  th:field="*{city}" placeholder ="city">
 							
 
 						<p class="form-label" for="age"> Age: </p>
-						<input type="text" class="form-control"  id="age" th:field="*{age}">
+						<input type="text" class="form-control"  id="age" th:field="*{age}" placeholder="age">
 						
 						<p class="form-label" for="password"> Password: </p>
-                            <input type ="text" th:field="*{password}" id="password"/>
+                        <input type ="text" class="form-control" th:field="*{password}" id="password" placeholder="password">
 
 
-                            <p>
-                                 <label> Roles:</label>
+                            <p class ="form-label" for="roles"> Roles:</label>
                                  <input type="checkbox" name ="roles_checkbox"
                                         th:each ="role: ${RolesSet}"
                                         th:text ="${role.getRoleName()}"
@@ -128,7 +127,18 @@
                                  />
 
 
-                        </p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="formCheckDefault">
+                            <label class="form-check-label" for="formCheckDefault">Default checkbox</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="formCheckChecked" checked="">
+                            <label class="form-check-label" for="formCheckChecked">Checked checkbox</label>
+                        </div>
+
+
+
+                            </p>
 
      <p>
         <input type="submit" value="сохранить">
