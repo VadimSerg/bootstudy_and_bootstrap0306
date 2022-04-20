@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="users")
@@ -50,6 +48,8 @@ public class User implements UserDetails {
     //  @NotEmpty(message = "SET shouldn't be empty")
     //  @Valid
     private Set<Role> roles = new HashSet<>();
+
+
 
     public User() {
     }
@@ -201,4 +201,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

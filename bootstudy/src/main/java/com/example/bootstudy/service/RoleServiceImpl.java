@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.bootstudy.dao.RoleDao;
 import com.example.bootstudy.model.Role;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +54,7 @@ public class RoleServiceImpl  implements  RoleService{
         return roleDao.getAuthorityByName(role);
     }
 
-
+    @Override
     public Set<Role> getRolesByRoleNames(String[] roleNames) {
 
             Set<Role> roles = new HashSet<>();
@@ -62,5 +63,16 @@ public class RoleServiceImpl  implements  RoleService{
             }
 
         return roles;
+    }
+
+    @Override
+        public Set<Role> getRolesByIds(Long[] ids) {
+        //Set<Role> roles =new HashSet<>();
+       Set<Role> rolesList= new HashSet();
+        for (Long id:ids) {
+            rolesList.add((getRoleById(id)));
+        }
+
+        return rolesList;
     }
 }

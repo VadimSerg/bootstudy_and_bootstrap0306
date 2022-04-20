@@ -101,7 +101,7 @@
 
      
 						<p class="form-label" for="surname" > Last name :  </p>
-						<input type="text" class="form-control"  id="surname"th:field="*{surname}" placeholder="username">
+						<input type="text" class="form-control"  id="surname"th:field="*{surname}" placeholder="surname">
         
      
 
@@ -127,24 +127,19 @@
                                  />
 
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="formCheckDefault">
-                            <label class="form-check-label" for="formCheckDefault">Default checkbox</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="formCheckChecked" checked="">
-                            <label class="form-check-label" for="formCheckChecked">Checked checkbox</label>
-                        </div>
-
-
-
                             </p>
 
-     <p>
-        <input type="submit" value="сохранить">
-     </p>
-    
 
+<!--                       <select th:field="*{roles}" data-th-name="roles_List"  input type="list">Почему в этом месте код работает без : th:field="*{roles}"????-->
+                        <p class ="form-label" for="roles"> Roles:</label> </p>
+                           <select data-th-name="roles_List" input type="list">
+                           <option value="" >--</option>
+                           <option th:each="role:${RolesSet}"
+                                   th:value="${role.getId()}"
+                                   th:text="${role.roleName}"></option>
+                       </select>
+
+                        <button type="button-submit" class="btn btn-success">Add new user</button>
  </form>
 		</div>
      

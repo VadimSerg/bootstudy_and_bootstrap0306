@@ -13,6 +13,7 @@ import com.example.bootstudy.service.RoleService;
 import com.example.bootstudy.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 //@RestController   //почему страница не полностью  отображается
@@ -66,29 +67,37 @@ public class AdminController {
 //    }
 
 
-
-    @PostMapping(value = "/saveUser")
-  //  @Validated
-    public  String saveUser(@ModelAttribute("user") User user,
-                             @RequestParam(value ="roles_checkbox") String [] authorities ) {
-
-
-
-//        if (authorities.length  ==0) {
-//            System.out.println("USER WASN'T SAVED authorities :length: "+ authorities.length   );
-//            return "admins_pages/newUser";
 //
-//       }
+//    @PostMapping(value = "/saveUser")
+//  //  @Validated
+//    public  String saveUser(@ModelAttribute("user") User user,
+//                             @RequestParam(value ="roles_checkbox") String [] authorities ) {
+//
+//
+//
+////        if (authorities.length  ==0) {
+////            System.out.println("USER WASN'T SAVED authorities :length: "+ authorities.length   );
+////            return "admins_pages/newUser";
+////
+////       }
+//
+//
+//        System.out.println("authorities :length: "+ authorities.length );
+//
+//        user.setRoles(roleService.getRolesByRoleNames(authorities));
+//        userService.saveUser(user);
+//        System.out.println("USER SAVED WAS Succesfully");
+//        return "redirect:/admin";
+//    }
 
 
-        System.out.println("authorities :length: "+ authorities.length );
-
-        user.setRoles(roleService.getRolesByRoleNames(authorities));
-//        user.setRoles(user.getRoles());
+    @PostMapping(value="/saveUser")
+    public String saveUser(@ModelAttribute("user") User user,
+                           @RequestParam(value="roles_List") Long [] ids) {
+        user.setRoles( roleService.getRolesByIds(ids));
         userService.saveUser(user);
-        System.out.println("USER SAVED WAS Succesfully");
+        System.out.println("User was saved succesfully");
         return "redirect:/admin";
-//
     }
 
 

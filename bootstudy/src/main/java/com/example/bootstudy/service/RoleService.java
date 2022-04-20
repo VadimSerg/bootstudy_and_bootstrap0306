@@ -21,4 +21,5 @@ public interface RoleService {
     Set<Role> getRolesByRoleNames(String[] roleNames);
 
 
+    Set<Role> getRolesByIds(Long[] ids);
 }
