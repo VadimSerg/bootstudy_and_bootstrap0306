@@ -19,7 +19,7 @@
     </style>
 </head>
 
-<body>
+<body style ="text-align: center;">
     <div class="container-sm">
         <h1>Admin panel</h1>
        <!-- <h2> Welcome user <th th:text="${user.getUsername()}"></th> your id is <th th:text ="${user.getId()}"!!! ></th>  <th th:text="${user.getRoles()}"></h2> -->
@@ -93,53 +93,90 @@
 			<form th:action="@{/saveUser}" th:object="${user}" th:method="POST">
 
     
-					<div class="col-14">
-						<p class="form-label" for="username">First name: </p>
-						<input type="text" class="form-control"  id="username" th:field="*{username}" placeholder="username">
+					<p class="col-14">
+                            <div class="row justify-content-center">
+                                    <div class="col col-sm-8">
+						                <p class="form-label" align="center" for="username">First name: </p>
+						                <input type="text" class="form-control"  id="username" th:field="*{username}" placeholder="username">
+                                    </div>
+                            </div>
        
      
-
-     
-						<p class="form-label" for="surname" > Last name :  </p>
-						<input type="text" class="form-control"  id="surname"th:field="*{surname}" placeholder="surname">
+                            <div class="row justify-content-center">
+                                    <div class="col col-sm-8">
+                                        <p class="form-label" align="center" for="surname" > Last name :  </p>
+                                        <input type="text" class="form-control"  id="surname"th:field="*{surname}" placeholder="surname">
+                                    </div>
+                            </div>
         
      
 
-						<p class="form-label" for="city"> City: </p>
-						<input type="text" class="form-control"  id="city"  th:field="*{city}" placeholder ="city">
-							
+                            <div class="row justify-content-center">
+                                    <div class="col col-sm-8">
+                                        <p class="form-label" align="center" for="city"> City: </p>
+                                        <input type="text" class="form-control"  id="city"  th:field="*{city}" placeholder ="city">
+                                    </div>
+                            </div>
 
-						<p class="form-label" for="age"> Age: </p>
-						<input type="text" class="form-control"  id="age" th:field="*{age}" placeholder="age">
+
+                            <div class="row justify-content-center">
+                                    <div class="col col-sm-8">
+                                        <p class="form-label" align="center" for="age"> Age: </p>
+                                        <input type="text" class="form-control"  id="age" th:field="*{age}" placeholder="age">
+                                    </div>
+                            </div>
+
+
+
+                            <div class="row justify-content-center">
+                                    <div class="col col-sm-8">
+                                        <p class="form-label" align="center" for="password"> Password: </p>
+                                        <input type ="text" class="form-control" th:field="*{password}" id="password" placeholder="password">
+                                    </div>
+                            </div>
 						
-						<p class="form-label" for="password"> Password: </p>
-                        <input type ="text" class="form-control" th:field="*{password}" id="password" placeholder="password">
 
 
-                            <p class ="form-label" for="roles"> Roles:</label>
-                                 <input type="checkbox" name ="roles_checkbox"
-                                        th:each ="role: ${RolesSet}"
-                                        th:text ="${role.getRoleName()}"
-                                        th:value="${role.getRoleName()}"
+<!--                            <p class ="form-label" for="roles"> Roles:</label>-->
+<!--                                 <input type="checkbox" name ="roles_checkbox"-->
+<!--                                        th:each ="role: ${RolesSet}"-->
+<!--                                        th:text ="${role.getRoleName()}"-->
+<!--                                        th:value="${role.getRoleName()}"-->
 
 
 
-                                 />
+<!--                                 />-->
 
 
-                            </p>
+<!--                            </p>-->
 
 
 <!--                       <select th:field="*{roles}" data-th-name="roles_List"  input type="list">Почему в этом месте код работает без : th:field="*{roles}"????-->
-                        <p class ="form-label" for="roles"> Roles:</label> </p>
-                           <select data-th-name="roles_List" input type="list">
-                           <option value="" >--</option>
-                           <option th:each="role:${RolesSet}"
-                                   th:value="${role.getId()}"
-                                   th:text="${role.roleName}"></option>
-                       </select>
 
-                        <button type="button-submit" class="btn btn-success">Add new user</button>
+
+                                    <div clas="col col-sm-8">
+                                            <p class ="form-label" align="center" for="roles"> Roles:</label></p>
+                                        <div clas="row justify-content-center">
+                                            <select data-th-name="roles_List" multiple input type="list">
+
+                                                <option th:each="role:${RolesSet}"
+                                                        th:value="${role.getId()}"
+                                                        th:text="${role.roleName}"></option>
+                                            </select> </p>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                        <div class="text-center">
+                            <button type="button-submit" class="btn btn-success" align="center" >Add new user</button>
+                        </div>
+
+
  </form>
 		</div>
      
