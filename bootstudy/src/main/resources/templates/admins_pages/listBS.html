@@ -11,6 +11,7 @@
 
 
 
+
     <style>table th,
     table td{padding:10px;}
     row {
@@ -59,11 +60,11 @@
         </thead>
 
 
-        <tbody><tr th:each="user:${usersSet}">
+        <tbody><tr  th:each="user:${usersSet}"  >
 
 
             <td th:utext="${user.id}">ID</td>
-            <td th:utext="${user.userName}">First name</td>
+            <td th:utext="${user.username}">First name</td>
             <td th:utext="${user.surname}">Surname</td>
             <td th:utext="${user.age}">Age</td>
             <td th:utext="${user.city}">City</td>
@@ -77,8 +78,104 @@
             </td>
 
 
-            <td> <a href="#" th:href="@{/edit/{id}(id=${user.getId()})}">
-             <button type="button" class="btn btn-info">Редактировать</button> </a></td>
+            <td>
+<!--                <a href="#" th:href="@{/edit/{id}(id=${user.getId()})}">-->
+               <!-- Button trigger modal -->
+<!--<a th:href="@{/edit/{id}(id=${user.getId()})}"-->
+<!--   button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                Edit user-->
+<!--                </a>-->
+<a button type="button" class="btn btn-success" data-bs-toggle="modal"
+   th:attr="data-bs-target='#exampleModal'+*{user.id}"> Edit user </a>
+
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModal'+user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  th:action="@{/edit/{id}(id=${user.getId()})}"
+                                  th:object="${user}"
+                                  th:method="PATCH">
+
+
+            <p class="col-14">
+            <div class="mb-3">
+
+
+            <div class="row justify-content-center">
+                <div class="col col-sm-8">
+
+
+                                <div class="mb-3">
+                                    <label for="userId" class="col-form-label">id:</label>
+                                    <input type="text" class="form-control" disabled="disabled" id="idEdit" name="userId" th:value="*{id}">
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="username" class="col-form-label">First name:</label>
+                                    <input type="text" class="form-control" id="usernameEdit" name="username" th:value="*{username}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="surname" class="col-form-label">Last name:</label>
+                                    <input type="text" class="form-control" id="surnameEdit" name="surname" th:value="*{surname}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="city" class="col-form-label">City:</label>
+                                    <input type="text" class="form-control" id="cityEdit" name="city" th:value="*{city }">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="age" class="col-form-label">Age:</label>
+                                    <input type="text" class="form-control" id="ageEdit" name="age" th:value="*{age}">
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="password" class="col-form-label">Password:</label>
+                                    <input type="text" class="form-control" id="passwordEdit" name="password" th:value="*{password}">
+                                </div>
+
+
+
+            <div clas="col col-sm-8">
+                <p class ="form-label" align="center" for="roles"> Roles:</label></p>
+                <div clas="row justify-content-center">
+                    <select data-th-name="roles_List" multiple input type="list">
+
+                        <option th:each="role:${RolesSet}"
+                                th:value="${role.getRoleName()}"
+                                th:text="${role.roleName}"></option>
+                    </select> </p>
+                </div>
+
+            </div>
+
+
+
+
+<!--            <button type="submit" class="btn btn-primary" data-bs-submit="modal">Save changes</button>-->
+
+<!--        </form>-->
+
+<!--      </div>-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-submit="modal">Save changes</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
             <td><a href="#" th:href="@{/{id}(id=${user.getId()})}">
             <button type="button" class="btn btn-danger">Удалить</button> </a></td>
 
@@ -135,24 +232,6 @@
                                     </div>
                             </div>
 						
-
-
-<!--                            <p class ="form-label" for="roles"> Roles:</label>-->
-<!--                                 <input type="checkbox" name ="roles_checkbox"-->
-<!--                                        th:each ="role: ${RolesSet}"-->
-<!--                                        th:text ="${role.getRoleName()}"-->
-<!--                                        th:value="${role.getRoleName()}"-->
-
-
-
-<!--                                 />-->
-
-
-<!--                            </p>-->
-
-
-<!--                       <select th:field="*{roles}" data-th-name="roles_List"  input type="list">Почему в этом месте код работает без : th:field="*{roles}"????-->
-
 
                                     <div clas="col col-sm-8">
                                             <p class ="form-label" align="center" for="roles"> Roles:</label></p>

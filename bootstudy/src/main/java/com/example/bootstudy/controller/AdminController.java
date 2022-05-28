@@ -45,7 +45,7 @@ public class AdminController {
     public String getUsers(Model model,@AuthenticationPrincipal UserDetails logedInUser) {
 
         User user = (User) userDetailsService.loadUserByUsername(logedInUser.getUsername());
-        model.addAttribute("user",user);
+        model.addAttribute("user",new User());
 
 
         model.addAttribute("usersSet",userService.getAll());
@@ -103,25 +103,22 @@ public class AdminController {
 
 
 
-    @GetMapping(value = "/edit/{id}")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("AllRoles",roleService.getAllRoles());
-        return "admins_pages/editForm";
-    }
+//    @GetMapping(value = "/edit/{id}")
+//    public String showEditForm(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("user", userService.getUserById(id));
+//        model.addAttribute("AllRoles",roleService.getAllRoles());
+//        return "admins_pages/editForm";
+//
+//    }
 
 
 
-   @PostMapping(value = "/{id}")
-    public String update(@Valid @ModelAttribute("user") User user,
-                            BindingResult bindingResult,
-                         @RequestParam(value = "roles_checkbox", required = true) String [] roleNames) {
-
-        if (bindingResult.hasErrors()) {
-            return  "admins_pages/newUser";
-        }
-
-       user.setRoles(roleService.getRolesByRoleNames(roleNames));
+   @PatchMapping(value = "/edit/{id}")
+   public String update( @ModelAttribute("user") User user,
+                         @PathVariable("id") Long id,
+                         @RequestParam(value = "roles_list") Long [] ids){
+       user = userService.getUserById(id);
+       user.setRoles(roleService.getRolesByIds(ids));
        userService.update(user);
         return "redirect:/admin";
    }
@@ -149,50 +146,50 @@ public class AdminController {
 
 
 
-    @GetMapping("/showFormRoles")
-    public String showFormForAddingRoles(Model model, Role role) {
-        model.addAttribute("Role", role);
-        return "admins_pages/newRole";
-    }
-
-
-    @PostMapping("saveRole")
-    public String saveRole( @Valid @ModelAttribute("Role") Role role
-                            ,BindingResult bindingResult)  {
-
-        if (bindingResult.hasErrors()){
-            return  "admins_pages/newRole";
-        }
-
-
-        roleService.saveRole(role);
-        return "redirect:/admin ";
-
-    }
-
-    @GetMapping("editRole/{id}")
-    public String showEditRoleForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("Role",roleService.getRoleById(id));
-        return "admins_pages/editRoleForm";
-    }
-
-    @PostMapping("/role{id}")
-    public String updateRole(@Valid @ModelAttribute("Role") Role role,BindingResult bindingResult ) {
-
-        if (bindingResult.hasErrors()) {
-            return  "admins_pages/editRoleForm";
-        }
-
-
-        roleService.update(role);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/role{id}")
-    public String deleteRole(@PathVariable("id") Long id) {
-        roleService.deleteRoleById(id);
-        return "redirect:/admin";
-    }
+//    @GetMapping("/showFormRoles")
+//    public String showFormForAddingRoles(Model model, Role role) {
+//        model.addAttribute("Role", role);
+//        return "admins_pages/newRole";
+//    }
+//
+//
+//    @PostMapping("saveRole")
+//    public String saveRole( @Valid @ModelAttribute("Role") Role role
+//                            ,BindingResult bindingResult)  {
+//
+//        if (bindingResult.hasErrors()){
+//            return  "admins_pages/newRole";
+//        }
+//
+//
+//        roleService.saveRole(role);
+//        return "redirect:/admin ";
+//
+//    }
+//
+//    @GetMapping("editRole/{id}")
+//    public String showEditRoleForm(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("Role",roleService.getRoleById(id));
+//        return "admins_pages/editRoleForm";
+//    }
+//
+//    @PostMapping("/role{id}")
+//    public String updateRole(@Valid @ModelAttribute("Role") Role role,BindingResult bindingResult ) {
+//
+//        if (bindingResult.hasErrors()) {
+//            return  "admins_pages/editRoleForm";
+//        }
+//
+//
+//        roleService.update(role);
+//        return "redirect:/admin";
+//    }
+//
+//    @GetMapping("/role{id}")
+//    public String deleteRole(@PathVariable("id") Long id) {
+//        roleService.deleteRoleById(id);
+//        return "redirect:/admin";
+//    }
 
 
 

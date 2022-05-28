@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="http://localhost:8060/admin" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" singleton="false" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http">
+    <method v="2">
+      <option name="LaunchBrowser.Before.Run" browser="b2a9dca7-9d0b-4e1e-98a8-afb19c1328d2" withDebugger="true" />
+    </method>
+  </configuration>
+</component>
