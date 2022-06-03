@@ -86,7 +86,7 @@
 <!--                Edit user-->
 <!--                </a>-->
 <a button type="button" class="btn btn-success" data-bs-toggle="modal"
-   th:attr="data-bs-target='#exampleModal'+*{user.id}"> Edit user </a>
+ href="#edit"  th:attr="data-bs-target='#exampleModal'+*{user.id}"> Edit user </a>
 
 
 <!-- Modal -->
@@ -100,7 +100,7 @@
       <div class="modal-body">
         <form  th:action="@{/edit/{id}(id=${user.getId()})}"
                                   th:object="${user}"
-                                  th:method="PATCH">
+                                  th:method="POST">
 
 
             <p class="col-14">

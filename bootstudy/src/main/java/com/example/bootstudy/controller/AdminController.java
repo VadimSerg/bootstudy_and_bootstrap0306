@@ -113,15 +113,16 @@ public class AdminController {
 
 
 
-   @PatchMapping(value = "/edit/{id}")
+   @PostMapping(value = "/edit/{id}")
    public String update( @ModelAttribute("user") User user,
-                         @PathVariable("id") Long id,
+                         @RequestParam(value = "id",required = false) Long id,
                          @RequestParam(value = "roles_list") Long [] ids){
        user = userService.getUserById(id);
        user.setRoles(roleService.getRolesByIds(ids));
        userService.update(user);
         return "redirect:/admin";
-   }
+//       return "admins_pages/listBS";
+    }
 
     @GetMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
