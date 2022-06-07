@@ -12,11 +12,11 @@ public interface UserService
 
     List<User> getAll();
 
-    User getUserById(long id);
+    User getUserById(Long id);
 
     void  update(User user);
 
-    void deleteUserById(long id);
+    void deleteUserById(Long id);
 
 
 }

@@ -112,7 +112,7 @@
 
 
                                 <div class="mb-3">
-                                    <label for="userId" class="col-form-label">id:</label>
+                                   <label for="id" class="col-form-label">id:</label>
                                     <input type="text" class="form-control" disabled="disabled" id="idEdit" name="userId" th:value="*{id}">
                                 </div>
 
@@ -151,7 +151,7 @@
                     <select data-th-name="roles_List" multiple input type="list">
 
                         <option th:each="role:${RolesSet}"
-                                th:value="${role.getRoleName()}"
+                                th:value="${role.getId()}"
                                 th:text="${role.roleName}"></option>
                     </select> </p>
                 </div>
