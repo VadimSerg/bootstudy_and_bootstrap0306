@@ -45,50 +45,16 @@ public class AdminController {
     public String getUsers(Model model,@AuthenticationPrincipal UserDetails logedInUser) {
 
         User user = (User) userDetailsService.loadUserByUsername(logedInUser.getUsername());
+        System.out.println("ID: " +user.getId() +" " +user.toString() +"roles: "+ user.getRoles());
         model.addAttribute("user",new User());
 
 
         model.addAttribute("usersSet",userService.getAll());
         model.addAttribute("RolesSet",roleService.getAllRoles());
-      return "admins_pages/listBS";
+        return "admins_pages/listBS";
 
 
     }
-
-
-//    @GetMapping("/showForm")
-//    public  String showFormForAddingUser(Model model) {
-//     //   User user = new User();
-//      //  model.addAttribute("user",user);
-//       // model.addAttribute("AllRoles",roleService.getAllRoles());
-////        return "admins_pages/newUser";
-//        return "admins_pages/listBS";
-//
-//    }
-
-
-//
-//    @PostMapping(value = "/saveUser")
-//  //  @Validated
-//    public  String saveUser(@ModelAttribute("user") User user,
-//                             @RequestParam(value ="roles_checkbox") String [] authorities ) {
-//
-//
-//
-////        if (authorities.length  ==0) {
-////            System.out.println("USER WASN'T SAVED authorities :length: "+ authorities.length   );
-////            return "admins_pages/newUser";
-////
-////       }
-//
-//
-//        System.out.println("authorities :length: "+ authorities.length );
-//
-//        user.setRoles(roleService.getRolesByRoleNames(authorities));
-//        userService.saveUser(user);
-//        System.out.println("USER SAVED WAS Succesfully");
-//        return "redirect:/admin";
-//    }
 
 
     @PostMapping(value="/saveUser")
@@ -101,23 +67,11 @@ public class AdminController {
     }
 
 
-
-
-//    @GetMapping(value = "/edit/{id}")
-//    public String showEditForm(@PathVariable("id") Long id, Model model) {
-//        model.addAttribute("user", userService.getUserById(id));
-//        model.addAttribute("AllRoles",roleService.getAllRoles());
-//        return "admins_pages/editForm";
-//
-//    }
-
-
-
    @PostMapping(value = "/edit/{id}")
    public String update(@ModelAttribute("user") User user,
 //                         @PathVariable(value = "id") Long id,
                         @RequestParam(value = "roles_List") Long [] ids){
-        //user= userService.getUserById(id);
+      //user= userService.getUserById(id);
       //  model.addAttribute("user",user);
 
        user.setRoles(roleService.getRolesByIds(ids));
@@ -126,13 +80,22 @@ public class AdminController {
 
     }
 
-   // @GetMapping("/{id}")
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        userService.deleteUserById(id);
+
+//    @PostMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Long id) {
+//        System.out.println("user with id " +id +" " + userService.getUserById(id) +"was removed");
+//        userService.deleteUserById(id);
+//        return "redirect:/admin";
+//    }
+
+    @PostMapping("/delete/") //типо тут можно попробовать с requestparam вместо pathvariable
+    public String delete(@ModelAttribute("user") User user,@RequestParam(value="idDelete") Long id){
+       // model.addAttribute("idDelete",id);
+        System.out.println("User with id " +  user.getId());
+        user=userService.getUserById(id);
+        userService.deleteUser(user);
         return "redirect:/admin";
     }
-
 
     //Code for user's page
     @GetMapping("/user")

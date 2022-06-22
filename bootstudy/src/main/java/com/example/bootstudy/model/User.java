@@ -104,14 +104,14 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-//    public User( Long id,String username, String surname, Integer age, String city, Set<Role> roles) {
-//        this.id = id;
-//        this.username = username;
-//        this.surname = surname;
-//        this.age = age;
-//        this.city = city;
-//        this.roles = roles;
-//    }
+    public User( Long id,String username, String surname, Integer age, String city, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.surname = surname;
+        this.age = age;
+        this.city = city;
+        this.roles = roles;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -164,7 +164,7 @@ public class User implements UserDetails {
                 "firstName='" + username + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
-                ", email='" + city + '\'' +
+                ", city=" + city + '\'' +
                 '}';
     }
 
