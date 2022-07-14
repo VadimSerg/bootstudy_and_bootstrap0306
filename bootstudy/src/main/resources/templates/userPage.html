@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>User page</title>
 </head>
-<body>
-
-</body>
 </html><!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
@@ -23,9 +20,46 @@
 
 </head>
 <body>
+
+<!----------NAVBAR----------------------------------------------->
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <span class="navbar-text">Navbar text</span>
+        <span class="navbar-text" sec:authentication="${loggedInUser.userName}"><span th:utext="${loggedInUser.userName}"></span></span>
+    </div>
+</nav>
+<!---------------------ЗДЕСЬ ЗАКАНЧИВАЕТСЯ NAVBAR -->
+
+
+
+
+
+<div class="row">
+<div class="col-md-2 column">
+    <div class="d-flex align-items-start" >
+
+        <div class="d-flex align-items-start" >
+
+            <div class="nav flex-column nav-pills w-100" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-admin-tab" data-bs-toggle="pill" href="#AllUsers" role="tab" aria-controls="AllUsers" aria-selected="true" sec:authorize="hasRole('ROLE_ADMIN')" >Admin</a>
+                <a class="nav-link" id="v-pills-user-tab" data-bs-toggle="pill" href="#AdminTable" role="tab" aria-controls="v-pills-user" aria-selected="false" sec:authorize="hasRole('ROLE_USER)" >User</a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 <div th:fragment="navuserbar">
-<div class="container-md">
-<h1>User information-page</h1>
+<div class="card w-75">
+    <h1>User information-page</h1>
+<div class="card-header">About user</div>
+<!--   -->
+<div class="card-body">
+<div class="container-sm">
+
     <br>
 <table class="table table-hover">
 
@@ -45,7 +79,7 @@
     <tr >
 
 
-        <td th:utext="${loggedInUser.id}">ID</td>-->
+        <td th:utext="${loggedInUser.id}">ID</td>
         <td th:utext="${loggedInUser.userName}">First name</td>
         <td th:utext="${loggedInUser.surname}">Surname</td>
         <td th:utext ="${loggedInUser.age}">Age</td>
@@ -73,6 +107,9 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout"/>
 </form>
+</div>
+</div>
+</div>
 </div>
 </div>
 </body>
