@@ -23,6 +23,7 @@
 
 </head>
 <body>
+<div th:fragment="navuserbar">
 <div class="container-md">
 <h1>User information-page</h1>
     <br>
@@ -44,19 +45,20 @@
     <tr >
 
 
-        <td th:utext="${user.id}">ID</td>
-        <td th:utext="${user.userName}">First name</td>
-        <td th:utext="${user.surname}">Surname</td>
-        <td th:utext ="${user.age}">Age</td>
-        <td th:utext="${user.city}">City</td>
+        <td th:utext="${loggedInUser.id}">ID</td>-->
+        <td th:utext="${loggedInUser.userName}">First name</td>
+        <td th:utext="${loggedInUser.surname}">Surname</td>
+        <td th:utext ="${loggedInUser.age}">Age</td>
+        <td th:utext="${loggedInUser.city}">City</td>
 
         <td >
             <ul>
-                <th:block th:each="role : ${user.roles}">
+                <th:block th:each="role : ${loggedInUser.roles}">
                     <li th:text="${role.roleName}">ROLE_USER</li>
                 </th:block>
             </ul>
         </td>
+
 
     </tr>
 
@@ -71,6 +73,7 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Logout"/>
 </form>
+</div>
 </div>
 </body>
 </html>
