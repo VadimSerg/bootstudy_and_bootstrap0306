@@ -1,7 +1,7 @@
 package com.example.bootstudy.dao;
 
-import org.springframework.stereotype.Component;
 import com.example.bootstudy.model.User;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,8 +42,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByName(String name) {
-        return entityManager.createQuery("select  u from User u where u.username = :name",User.class).
-                setParameter("name",name).getSingleResult();
+        return entityManager.createQuery("select  u from User u join fetch u.roles " +
+                "where u.username = :name", User.class).
+                setParameter("name", name).getSingleResult();
     }
 
     @Override

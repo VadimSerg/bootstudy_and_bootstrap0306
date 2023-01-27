@@ -18,16 +18,6 @@ public class Role implements GrantedAuthority {
     @NotEmpty(message = "Don't forget to input role name")
     private  String roleName;
 
-
-//    @ManyToMany(cascade = CascadeType.MERGE)
-
-//    @JoinTable(name = "user_role",
-//          joinColumns = @JoinColumn(name ="role_id"),
-//          inverseJoinColumns = @JoinColumn(name ="user_id"))
-//    @ManyToMany
-//    private Set<User> users;
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
