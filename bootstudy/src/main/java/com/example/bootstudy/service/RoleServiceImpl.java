@@ -1,11 +1,10 @@
 package com.example.bootstudy.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.example.bootstudy.dao.RoleDao;
 import com.example.bootstudy.model.Role;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,9 +66,8 @@ public class RoleServiceImpl  implements  RoleService{
 
     @Override
         public Set<Role> getRolesByIds(Long[] ids) {
-        //Set<Role> roles =new HashSet<>();
-       Set<Role> rolesList= new HashSet();
-        for (Long id:ids) {
+        Set<Role> rolesList = new HashSet();
+        for (Long id : ids) {
             rolesList.add((getRoleById(id)));
         }
 

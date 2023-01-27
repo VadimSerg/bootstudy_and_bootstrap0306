@@ -1,12 +1,14 @@
 package com.example.bootstudy.model;
 
-import com.example.bootstudy.model.Role ;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -32,23 +34,22 @@ public class User implements UserDetails {
     private Integer age;
 
 
-    @Column(name="city")
+    @Column(name = "city")
     @NotBlank(message = "city shouldn't be empty")
-    private  String city;
+    private String city;
 
-    @Column(name ="password")
+    @Column(name = "password")
     @NotBlank(message = "password shouldn't be empty")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinTable(name ="user_roles" ,
-            joinColumns =@JoinColumn(name = "user_id"),
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
-    //  @NotEmpty(message = "SET shouldn't be empty")
-    //  @Valid
+    @NotEmpty(message = "SET shouldn't be empty")
+    @Valid
     private Set<Role> roles = new HashSet<>();
-
 
 
     public User() {
@@ -97,15 +98,6 @@ public class User implements UserDetails {
 
 
     public User( String username, String surname, Integer age, String city, Set<Role> roles) {
-        this.username = username;
-        this.surname = surname;
-        this.age = age;
-        this.city = city;
-        this.roles = roles;
-    }
-
-    public User( Long id,String username, String surname, Integer age, String city, Set<Role> roles) {
-        this.id = id;
         this.username = username;
         this.surname = surname;
         this.age = age;
@@ -170,16 +162,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
-//        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
-//        for (Role role:roles) {
-//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-//        }
-//
-//
-//        return grantedAuthorities;
-
-        return  getRoles();
+        return getRoles();
     }
 
     @Override

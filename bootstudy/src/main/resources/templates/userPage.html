@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User page</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,54 +14,107 @@
 
 </head>
 <body>
-<div class="container-md">
-<h1>User information-page</h1>
+
+<!----------NAVBAR----------------------------------------------->
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <span class="navbar-text">Logged in user:</span>
+        <span class="navbar-text"><span th:utext="${loggedInUser.userName}"></span></span>
+        <form method="post" th:action="@{/logout}">
+            <input type="submit" value="Logout"/>
+        </form>
+
+    </div>
+</nav>
+<!---------------------ЗДЕСЬ ЗАКАНЧИВАЕТСЯ NAVBAR -->
+
+
+<!--start div class="row"-->
+<div class="row">
+    <!--left side with vertical  menu navs START  -->
     <br>
-<table class="table table-hover">
+    <div class="d-flex align-items-start">
+        <div class="col-sm-2">
+            <div aria-orientation="vertical" class="nav flex-column nav-pills me-2" id="v-pills-tab" role="tablist">
+                <button aria-controls="v-pills-user" aria-selected="true" class="nav-link active"
+                        data-bs-target="#v-pills-user"
+                        data-bs-toggle="pill" id="v-pills-user-tab" role="tab" sec:authorize="hasRole('ROLE_USER)"
+                        type="button">User
+                </button>
 
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Фамилия</th>
-        <th scope="col">Возраст</th>
-        <th scope="col">Город</th>
-        <th scope="col">Роли</th>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="tab-content" id="v-pills-tabContent">
 
-    </tr>
-    </thead>
-
-
-    <tr >
-
-
-        <td th:utext="${user.id}">ID</td>
-        <td th:utext="${user.userName}">First name</td>
-        <td th:utext="${user.surname}">Surname</td>
-        <td th:utext ="${user.age}">Age</td>
-        <td th:utext="${user.city}">City</td>
-
-        <td >
-            <ul>
-                <th:block th:each="role : ${user.roles}">
-                    <li th:text="${role.roleName}">ROLE_USER</li>
-                </th:block>
-            </ul>
-        </td>
-
-    </tr>
-
-</table>
+                <div aria-labelledby="v-pills-user-tab" class="tab-pane fade show active" id="v-pills-user"
+                     role="tabpanel">
+                    <div th:fragment="navuserbar">
+                        <div class="card flex">
+                            <h1>User information-page</h1>
+                            <div class="card-header">About user</div>
+                            <!--   -->
+                            <div class="card-body">
 
 
+                                <br>
+                                <table class="table table-hover">
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Имя</th>
+                                        <th scope="col">Фамилия</th>
+                                        <th scope="col">Возраст</th>
+                                        <th scope="col">Город</th>
+                                        <th scope="col">Роли</th>
+
+                                    </tr>
+                                    </thead>
 
 
-</form>
+                                    <tr>
 
 
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout"/>
-</form>
+                                        <td th:utext="${loggedInUser.id}">ID</td>
+                                        <td th:utext="${loggedInUser.userName}">First name</td>
+                                        <td th:utext="${loggedInUser.surname}">Surname</td>
+                                        <td th:utext="${loggedInUser.age}">Age</td>
+                                        <td th:utext="${loggedInUser.city}">City</td>
+
+                                        <td>
+                                            <ul>
+                                                <th:block th:each="role : ${loggedInUser.roles}">
+                                                    <li th:text="${role.roleName}">ROLE_USER</li>
+                                                </th:block>
+                                            </ul>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </div>
+<br>
+
+<!--left side with vertical  menu navs END  -->
+
+</div>
+<!--End div class row-->
 </body>
 </html>
